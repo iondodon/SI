@@ -1,0 +1,15 @@
+1. analiza domeniului
+2. analiza solutiilor existente
+3. implementarea noastra : diagrame, codul se considera anexa
+
++ comentarii (headers)
+
+
+*de ales un ide cu plugin care poate lucra cu platforma arduino
+*de instalat un simulator ex: proteus
+
+*de analizat simulatoare pentru arduino cu short description
+*de analizat ides cu short description
+
+De facut un program unde avem un led si un buton. Cand apasam pe buton - ledul se aprinde.
+DE facut si raport.
