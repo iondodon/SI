@@ -7,15 +7,15 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 const byte ROWS = 4; // four rows
 const byte COLS = 4; // four columns
 
-const bytes = {
+char keys[ROWS][COLS] = {
   {'7', '8', '9', '/'},
   {'4', '5', '6', '*'},
   {'1', '2', '3', '-'},
   {'c', '0', '=', '+'}
-}
+};
 
-byte rowPins[ROWS] = {2, 3, 4, 5} // connect to rows pinouts of the keypad
-byte colPins[COLS] = {6, 7, 8, 9} // connect to column pinouts of the keypad
+byte rowPins[ROWS] = {2, 3, 4, 5}; // connect to rows pinouts of the keypad
+byte colPins[COLS] = {6, 7, 8, 9}; // connect to column pinouts of the keypad
 
 int i = 0;
 char arr[10];
