@@ -2,6 +2,9 @@
 #include <SPI.h>
 #include<LiquidCrystal.h>
 
+#define LED_RED 1
+#define LED_GREEN 0
+  
 const byte ROWS = 4; // four rows
 const byte COLS = 4; // four columns
 
@@ -27,6 +30,10 @@ LiquidCrystal lcd(10);
 void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
+  pinMode(LED_RED, OUTPUT);
+  pinMode(LED_GREEN, OUTPUT);
+  digitalWrite(LED_RED, LOW);
+  digitalWrite(LED_GREEN, LOW);
   // Print a message to the LCD.}
   // lcd.cursor();
 }
@@ -39,11 +46,15 @@ void loop() {
       lcd.setCursor(1, 1);
       if(inserted_code == secret_code) {
         lcd.print("Correct");
+        digitalWrite(LED_GREEN, HIGH);
+        digitalWrite(LED_RED, LOW);
       } else {
         lcd.print("Incorrect");
+        digitalWrite(LED_GREEN, LOW);
+        digitalWrite(LED_RED, HIGH);
       }
       lcd.display();
-      delay(2000);
+      delay(1000);
       lcd.clear();
       inserted_code = 0;
     } else if(key >= 48 && key <= 57 && inserted_code * 10 < 9999) {
