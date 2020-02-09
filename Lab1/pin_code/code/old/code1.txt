@@ -1,6 +1,8 @@
 #include<Keypad.h>
-#include <SPI.h>
 #include<LiquidCrystal.h>
+
+const int rs = 13, en = 12, d4 = 11, d5 = 10, d6 = 1, d7 = 0;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 const byte ROWS = 4; // four rows
 const byte COLS = 4; // four columns
@@ -12,17 +14,16 @@ char keys[ROWS][COLS] = {
   {'c', '0', '=', '+'}
 };
 
+int secret_code = 1234;
+int inserted_code = 0;
+
 byte rowPins[ROWS] = {2, 3, 4, 5}; // connect to rows pinouts of the keypad
 byte colPins[COLS] = {6, 7, 8, 9}; // connect to column pinouts of the keypad
 
 int i = 0;
 char arr[10];
 
-int secret_code = 1234;
-int inserted_code = 0;
-
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
-LiquidCrystal lcd(10);
 
 void setup() {
   // set up the LCD's number of columns and rows:
@@ -53,4 +54,5 @@ void loop() {
       lcd.display(); 
     }
   }
+  
 }
