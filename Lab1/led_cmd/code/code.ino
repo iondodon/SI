@@ -18,6 +18,8 @@ static char getChar(FILE *stream)
     return c;
 }
 
+char c;
+
 void setup() {
   Serial.begin(9600) ;
   
@@ -25,11 +27,11 @@ void setup() {
   stdout = f;
   stdin = f;
 
-  char c;
-  scanf("%c", &c);
-  printf("%c %d", c, 20);
+  printf("Ion\n");
+  printf("1");
 }
 
 void loop() {
-  
+  scanf("%c", &c);
+  printf("%c", c);
 }
