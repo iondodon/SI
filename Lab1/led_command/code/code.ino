@@ -1,7 +1,4 @@
-#include<stdio.h>
-#define LED_PIN 12
-
-String command;
+#include "global.h"
 
 void setup() {
   pinMode(LED_PIN, OUTPUT);

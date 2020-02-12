@@ -1,12 +1,15 @@
+#include "global.h"
+
 void setup() {
-  pinMode(4, INPUT_PULLUP);
-  pinMode(7, OUTPUT);
+  pinMode(BTN_PIN, INPUT_PULLUP);
+  pinMode(LED_PIN, OUTPUT);
 }
 
+
 void loop() {
-    if(digitalRead(4) == LOW) {
-      digitalWrite(7, HIGH);
+    if(digitalRead(BTN_PIN) == LOW) {
+      digitalWrite(LED_PIN, HIGH);
     } else {
-      digitalWrite(7, LOW);
+      digitalWrite(LED_PIN, LOW);
     }
 }
