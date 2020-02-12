@@ -6,7 +6,7 @@ void setup() {
 }
 
 void loop() {
-  command = Serial.readString();
+  String command = Serial.readString();
 
   if(command.length()) {
     Serial.println(command);
@@ -19,4 +19,6 @@ void loop() {
       Serial.println("LED is off");
     } 
   }
+
+//  printf("%d\n", 10);
 }

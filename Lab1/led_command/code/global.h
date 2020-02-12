@@ -3,6 +3,4 @@
 
 #define LED_PIN 12
 
-String command;
-
 #endif
