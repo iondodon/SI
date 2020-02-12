@@ -27,7 +27,7 @@ void setup() {
   stdout = f;
   stdin = f;
 
-  printf("Ion\n");
+  printf("aaa\n");
   printf("1");
 }
 
