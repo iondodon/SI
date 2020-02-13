@@ -20,20 +20,23 @@ static char getChar(FILE *stream)
     return c;
 }
 
-char str[10];
-
-void readString() {
+String readString() {
   char c;
-  int i = 0;
+  String str;
   do {
     scanf("%c", &c);
     if(c != 0 && c != '\r'){
-      str[i] = c;
-      i = i + 1;
+      str.concat(c);
     }
   }while(c!= '\r');
 
-  printf("%c", str[0]);
+  return str;
+}
+
+void writeString(String str) {
+  for(int i = 0; i < str.length(); i++) {
+    printf("%c", str[i]);
+  }
 }
 
 void setup() {
@@ -43,9 +46,10 @@ void setup() {
   stdout = f;
   stdin = f;
 
-  printf("7\r");
+  printf("3\r");
 }
 
 void loop() {
-  readString();
+  String str = readString();
+  writeString(str);
 }
