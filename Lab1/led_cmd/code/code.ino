@@ -12,7 +12,7 @@ static int putChar(char c, FILE *stream)
 static char getChar(FILE *stream)
 {
     char c;
-    while(!Serial.available()) {  
+    while(Serial.available()) {  
        c = Serial.read();
     }
     return c;
@@ -27,8 +27,7 @@ void setup() {
   stdout = f;
   stdin = f;
 
-  printf("aaa\n");
-  printf("1");
+  printf("2 ");
 }
 
 void loop() {
