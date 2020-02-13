@@ -1,0 +1,52 @@
+#include "MyStdlib.h"
+
+static Stream *_stream_ptr;
+static Print *_print_ptr;
+
+void MyStdlib::open(Stream &str)
+{
+    close();
+    _stream_ptr = &str;
+    _fp = fdevopen(_putchar, _getchar);
+};
+
+void MyStdlib::open(Print &ptr)
+{
+    close();
+    _print_ptr = &ptr;
+    _fp = fdevopen(_putchar, _getchar);
+};
+
+void MyStdlib::close()
+{
+    if (_fp)
+    {
+        fclose(_fp);
+        _fp = NULL;
+        _stream_ptr = NULL;
+    }
+};
+
+int MyStdlib::_putchar(char c, FILE *_fp)
+{
+    if (c == '\n')
+    {
+        _putchar((char)'\r', _fp);
+    }
+    if (_stream_ptr)
+    {
+        _stream_ptr->write(c);
+    }
+    else if (_print_ptr)
+    {
+        _print_ptr->write(c);
+    }
+
+    return (1);
+};
+
+int MyStdlib::_getchar(FILE *fp)
+{
+    while (!(_stream_ptr->available()));
+    return (_stream_ptr->read());
+}
