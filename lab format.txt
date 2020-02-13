@@ -13,3 +13,9 @@
 
 De facut un program unde avem un led si un buton. Cand apasam pe buton - ledul se aprinde.
 DE facut si raport.
+
+Domain
+Component description
+Implementation(scheme)
+Proof(video)
+Annex(cod sursa)

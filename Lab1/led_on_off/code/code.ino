@@ -1,15 +1,18 @@
-#include "global.h"
+#include "button.h"
+#include "led.h"
+
+Button *btn;
+Led *led;
 
 void setup() {
-  pinMode(BTN_PIN, INPUT_PULLUP);
-  pinMode(LED_PIN, OUTPUT);
+  btn = new Button(4);
+  led = new Led(7);
 }
 
-
 void loop() {
-    if(digitalRead(BTN_PIN) == LOW) {
-      digitalWrite(LED_PIN, HIGH);
+    if(bth->pressed()) {
+      led->turnOn();
     } else {
-      digitalWrite(LED_PIN, LOW);
+      led->turnOff();
     }
 }
