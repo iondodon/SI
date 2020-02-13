@@ -5,8 +5,8 @@
 #include <SPI.h>
 #include "LiquidCrystal.h"
 
-#define LED_RED 1
-#define LED_GREEN 0
+#define LED_RED 15
+#define LED_GREEN 14
 
 const byte ROWS = 4; // four rows
 const byte COLS = 4; // four columns
