@@ -6,7 +6,6 @@ Ledd *ledd = new Ledd(12);
 
 void setup() {
   Serial.begin(9600);
-  printf("2\r");
 }
 
 void loop() {
