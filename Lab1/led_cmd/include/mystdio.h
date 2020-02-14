@@ -6,13 +6,20 @@
 
 static FILE *f;
 
+enum StreamIO { SERIALIO, KEYPADIO, LCDIO };
+
 class Mystdio {
+  private:
+    static int putCharSerial(char c, FILE *stream);
+    static char getCharSerial(FILE *stream);
+
+
+
   public:
     Mystdio();
     String readStr();
     void writeStr(String str);
-    static int putChar(char c, FILE *stream);
-    static char getChar(FILE *stream);
+    void open(StreamIO streamIo);
 };
 
 #endif
