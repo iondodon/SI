@@ -4,11 +4,14 @@ Mystdio lcdio(StreamIO::SERIALIO);
 
 void setup() {
   Serial.begin(9600);
-  lcdio.open(StreamIO::LCDIO);
+  lcdio.open(StreamIO::KEYPADIO);
+  
+  Serial.print("1");
+  char c;
+  scanf("%c", &c);
+  Serial.print(c);
 }
 
 void loop() {
-  // if(key) {
-  //   Serial.print(key);
-  // }
+
 }

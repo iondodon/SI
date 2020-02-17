@@ -1,5 +1,20 @@
 #include "mystdio.h"
 
+const byte ROWS = 4; // four rows
+const byte COLS = 4; // four columns
+
+char keys[ROWS][COLS] = {
+  {'7', '8', '9', '/'},
+  {'4', '5', '6', '*'},
+  {'1', '2', '3', '-'},
+  {'c', '0', '=', '+'}
+};
+
+byte rowPins[ROWS] = {2, 3, 4, 5}; // connect to rows pinouts of the keypad
+byte colPins[COLS] = {6, 7, 8, 9}; // connect to column pinouts of the keypad
+
+Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+
 String Mystdio::readStr() {
   char c;
   String str;
@@ -34,25 +49,29 @@ static char Mystdio::getCharSerial(FILE *stream)
     return c;
 }
 
+static int Mystdio::putCharKeypad(char c, FILE *stream) {
+  Serial.println("Keypad can't write.");
+  return 0;
+}
 
-void Mystdio::open(StreamIO streamIo) {
-  if(streamIo == SERIALIO) {
+static char Mystdio::getCharKeypad(FILE *stream) {
+  char c = 0;
+  do {
+    c = keypad.getKey();
+  } while(c != 0);
+  return c;
+}
+
+void Mystdio::open(StreamIO streamIO) {
+  if(streamIO == SERIALIO) {
     f = fdevopen(Mystdio::putCharSerial, Mystdio::getCharSerial);
-  } else if(streamIo == StreamIO::KEYPADIO) {
-
-  } else if(streamIo == StreamIO::LCDIO) {
+  } else if(streamIO == StreamIO::KEYPADIO) {
+    f = fdevopen(Mystdio::getCharKeypad, Mystdio::getCharKeypad);
+  } else if(streamIO == StreamIO::LCDIO) {
     
   }
   stdout = f;
   stdin = f;
-}
-
-static int Mystdio::putCharLCD(char c, FILE *stream) {
-  return 0;
-}
-
-static char Mystdio::getCharLCD(FILE *stream) {
-  return 0;
 }
 
 Mystdio::Mystdio(StreamIO streamIO) {
