@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <Arduino.h>
 #include <Keypad.h>
+#include "LiquidCrystal.h"
 
 static FILE *f;
 
@@ -15,9 +16,11 @@ class Mystdio {
     static char getCharSerial(FILE *stream);
     static int putCharKeypad(char c, FILE *stream);
     static char getCharKeypad(FILE *stream);
+    static int putCharLcd(char c, FILE *stream);
+    static char getCharLcd(FILE *stream);
 
   public:
-    Mystdio(StreamIO streamIO);
+    Mystdio();
     String readStr();
     void writeStr(String str);
     void open(StreamIO streamIo);

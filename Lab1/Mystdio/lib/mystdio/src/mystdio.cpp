@@ -14,6 +14,7 @@ byte rowPins[ROWS] = {2, 3, 4, 5}; // connect to rows pinouts of the keypad
 byte colPins[COLS] = {6, 7, 8, 9}; // connect to column pinouts of the keypad
 
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+LiquidCrystal lcd(10);
 
 String Mystdio::readStr() {
   char c;
@@ -55,25 +56,38 @@ static int Mystdio::putCharKeypad(char c, FILE *stream) {
 }
 
 static char Mystdio::getCharKeypad(FILE *stream) {
-  char c = 0;
+  char c;
+
   do {
+    c = 0;
     c = keypad.getKey();
-  } while(c != 0);
+  } while(c == 0);
+
   return c;
+}
+
+static int Mystdio::putCharLcd(char c, FILE *stream) {
+  lcd.print(c);
+  return 0;
+}
+
+static char Mystdio::getCharLcd(FILE *stream) {
+  Serial.println("Lcd can't read.");
+  return 0;
 }
 
 void Mystdio::open(StreamIO streamIO) {
   if(streamIO == SERIALIO) {
     f = fdevopen(Mystdio::putCharSerial, Mystdio::getCharSerial);
   } else if(streamIO == StreamIO::KEYPADIO) {
-    f = fdevopen(Mystdio::getCharKeypad, Mystdio::getCharKeypad);
+    f = fdevopen(Mystdio::putCharKeypad, Mystdio::getCharKeypad);
   } else if(streamIO == StreamIO::LCDIO) {
-    
+     f = fdevopen(Mystdio::putCharLcd, Mystdio::getCharLcd);
   }
   stdout = f;
   stdin = f;
 }
 
-Mystdio::Mystdio(StreamIO streamIO) {
-  Mystdio::open(streamIO);
+Mystdio::Mystdio() {
+  
 }
