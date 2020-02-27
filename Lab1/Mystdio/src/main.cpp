@@ -1,18 +1,18 @@
 #include "mystdio.h"
 
-Mystdio keypadio;
-Mystdio lcdio;
+Mystdio mystdio;
 
 void setup() {
   Serial.begin(9600);
-  keypadio.open(StreamIO::KEYPADIO);
+  mystdio.open(StreamIO::KEYPADIO);
   
-  Serial.print("8");
+  Serial.print("1");
 }
 
 void loop() {
   char c;
+  mystdio.open(StreamIO::KEYPADIO);
   scanf("%c", &c);
-  lcdio.open(StreamIO::LCDIO);
+  mystdio.open(StreamIO::LCDIO);
   printf("%c", c);
 }
