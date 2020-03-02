@@ -22,7 +22,6 @@
 #define LOW_RES DEFAULT
 #endif
 
-
 // library interface description
 class LM35Sensor
 {
