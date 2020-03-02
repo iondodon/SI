@@ -19,6 +19,14 @@ void Mystdio::writeStr(String str) {
   }
 }
 
+void Mystdio::printDouble(double nmb) {
+  int left = (int) nmb;
+  int right = ((int)(nmb * 10)) % 10;
+
+  printf("%d.", left);
+  printf("%d", right);
+}
+
 static int Mystdio::putCharSerial(char c, FILE *stream)
 {
     Serial.write(c) ;
@@ -36,6 +44,7 @@ static char Mystdio::getCharSerial(FILE *stream)
 
 void Mystdio::open(StreamIO streamIO) {
   if(streamIO == SERIALIO) {
+    Serial.begin(9600);
     f = fdevopen(Mystdio::putCharSerial, Mystdio::getCharSerial);
   }
   

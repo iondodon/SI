@@ -1,20 +1,23 @@
 #include <Arduino.h>
+#include <LM35.h>
 #include "mystdio.h"
 
-void setup() {
-    Serial.begin(9600);
-    pinMode(10, OUTPUT);
+#define pinoSensor 1 
+#define DELAY_TIME 500 
+
+Mystdio mystdio;
+LM35Sensor lm35;
+
+void setup() { 
+    mystdio.open(StreamIO::SERIALIO);
+    printf("%d\r", 1);
 }
 
 void loop() {
-    int sensorValue = analogRead(A0);
-    Serial.println(sensorValue);
+    lm35.read(pinoSensor);
 
-    if(sensorValue < 15) {
-        digitalWrite(10, HIGH);
-    } else {
-        digitalWrite(10, LOW);
-    }
+    mystdio.printDouble(lm35.getCelsius());
+    printf("\r");
 
-    delay(1000);
+    delay(DELAY_TIME); 
 }

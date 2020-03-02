@@ -19,6 +19,7 @@ class Mystdio {
     String readStr();
     void writeStr(String str);
     void open(StreamIO streamIo);
+    void printDouble(double);
 };
 
 #endif
