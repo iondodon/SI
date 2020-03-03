@@ -1,11 +1,11 @@
 #ifndef FILTERS_HEADER
 #define FILTERS_HEADER
 
-void pushTemp(double arr[3], double newTemp);
+void pushTemp(double *arr, double newTemp);
 void swap(double &a, double &b);
-void sortArr(double arr[3]);
+void sortArr(double *arr);
 
-void calculateMedian(double rawBuff[3], double medianBuff[3]);
-double getWeighterAverage(double medianBuff[3]);
+void calculateMedian(double *rawBuff, double *medianBuff);
+double getWeighterAverage(double *medianBuff);
 
 #endif
