@@ -23,5 +23,7 @@ void calculateMedian(int *rawBuff, int *medianBuff) {
 
 int getWeighterAverage(int *medianBuff) {
     int weight0 = 50, weight1 = 25, weight2 = 10;
-    return (medianBuff[0] * weight0 + medianBuff[1] * weight1 + medianBuff[2] * weight2) / (weight1 + weight1 + weight2);
+    return (medianBuff[0] * weight0 + medianBuff[1] * weight1 + medianBuff[2] * weight2)
+             / 
+            (weight1 + weight1 + weight2);
 }
