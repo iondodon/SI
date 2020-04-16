@@ -3,16 +3,21 @@
 #include "LAMP.h"
 #include "LiquidCrystal.h"
 #include "mystdio.h"
-#include <DHT.h>
+#include "DHT.h"
+#include "Encoder.h"
 
 #define DHTPIN 2
 #define DHTTYPE    DHT22
+
+int temperatureSetpoint;
 
 DHT dht(DHTPIN, DHT22);
 L298N motor(A1, 6, 5);
 LAMP lamp(7);
 LiquidCrystal lcd(10);
 Mystdio mystdio;
+
+Encoder myEnc(4, 3);
 
 void setup() {
   mystdio.open(StreamIO::SERIALIO);
@@ -22,52 +27,33 @@ void setup() {
 
   lcd.begin(16, 2);
   printf("Started \r");
+
+  lcd.clear();
+  lcd.print("Reading setpoints");
+
+  printf("Temperature setpoint: ");
+  scanf("%d", &temperatureSetpoint);
+
   lcd.print("Started");
 
   dht.begin();
 }
 
-void setMotorSpped() {
-  lcd.clear();
-
-  printf("speed (percent): ");
-  int percent;
-  scanf("%d", &percent);
-
-  lcd.print("Motor speed: ");
-  lcd.print(percent);
-  delay(3000);
-  lcd.clear();
-
-  motor.speedUpByPercent(percent);
-}
-
-void setLamp() {
-  printf("on/off?: ");
-  int on;
-  scanf("%d", &on);
-  lcd.clear();
-  if(on) {
-    lamp.setOn();
-    lcd.print("Lamp is on");
-  } else {
-    lamp.setOff();
-    lcd.print("Lamp is off");
-  }
-  delay(3000);
-  lcd.clear();
-}
-
 void loop() {
   delay(1000);
-  int RH = dht.readHumidity();
   int temperature = dht.readTemperature();
-  printf("%d, %d\r", RH, temperature);
-  
-  String cmd = mystdio.readStr();
-  if(cmd == "motor_speed:") {
-    setMotorSpped();      
-  } else if(cmd == "set_lamp:") {
-    setLamp();
+  lcd.clear();
+  lcd.print("temp:");
+  lcd.print(temperature);
+  lcd.print("sp:");
+  lcd.print(temperatureSetpoint);
+
+  long newPosition = myEnc.read();
+  printf("%ld\r", newPosition);
+
+  if(temperature > temperatureSetpoint) {
+    lamp.setOn();
+  } else {
+    lamp.setOff();
   }
 }
